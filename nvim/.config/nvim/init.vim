@@ -62,6 +62,7 @@ call plug#begin('~/.vim/plugged')
    Plug 'tpope/vim-surround'
    Plug 'rust-lang/rust.vim'
    Plug 'tpope/vim-fugitive'
+   Plug 'mattn/emmet-vim'
 call plug#end()
 
 " EasyMotion
