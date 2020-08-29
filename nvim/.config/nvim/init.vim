@@ -29,15 +29,12 @@ nnoremap <esc><esc> :silent! nohls<cr>
 " Set Leader to Space
 let mapleader = "\<Space>"
 " Reload vimrc
-nnoremap <leader>rv :source<Space>$MYVIMRC<cr>
+nnoremap <leader>rv :source<Space>$HOME/.config/nvim/init.vim<cr>
 
 " Tab
-nnoremap tn :tabnew<cr>
-nnoremap tk :tabnext<cr>
-nnoremap tj :tabprev<cr>
-nnoremap th :tabfirst<cr>
-nnoremap tl :tablast<cr>
-nnoremap tn :tabnew<cr>
+nnoremap <leader>t :tabnew<cr>
+nnoremap <leader>k :tabnext<cr>
+nnoremap <leader>j :tabprev<cr>
 
 " Save and exit key mapping
 nnoremap <leader>s :w<cr>
@@ -55,7 +52,7 @@ call plug#begin('~/.vim/plugged')
    Plug 'neoclide/coc.nvim', {'branch': 'release'}
    Plug 'prettier/vim-prettier', {
   \ 'do': 'npm install',
-  \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] }
+  \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html', 'python'] }
    Plug 'preservim/nerdcommenter'
    Plug '/usr/local/opt/fzf'
    Plug 'junegunn/fzf.vim'
@@ -63,10 +60,11 @@ call plug#begin('~/.vim/plugged')
    Plug 'rust-lang/rust.vim'
    Plug 'tpope/vim-fugitive'
    Plug 'mattn/emmet-vim'
+   Plug 'kana/vim-arpeggio'
 call plug#end()
 
 " EasyMotion
-nmap ; <Plug>(easymotion-s2)
+nmap <leader>; <Plug>(easymotion-s2)
 
 " Nerd Commenter
 map <C-_> <plug>NERDCommenterToggle
@@ -80,6 +78,11 @@ nnoremap <C-f> :Rg!
 " Prettier
 let g:prettier#autoformat = 0
 autocmd BufWritePre *.html,*.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue PrettierAsync
+
+" Arpeggio
+call arpeggio#map('i', '', 0, 'fn', 'function')
+call arpeggio#map('i', '', 0, 'rn', 'return')
+call arpeggio#map('i', '', 0, 'mt', 'import')
 
 " CoC
 " if hidden is not set, TextEdit might fail.
