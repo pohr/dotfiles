@@ -36,6 +36,12 @@ nnoremap <leader>t :tabnew<cr>
 nnoremap <leader>k :tabnext<cr>
 nnoremap <leader>j :tabprev<cr>
 
+" Windows
+nnoremap <C-J> <C-W>j
+nnoremap <C-K> <C-W>k
+nnoremap <C-L> <C-W>l
+nnoremap <C-H> <C-W>h
+
 " Save and exit key mapping
 nnoremap <leader>s :w<cr>
 nnoremap <leader>q :q!<cr>
@@ -45,22 +51,24 @@ let g:loaded_matchparen=1
 
 " Plugged
 call plug#begin('~/.vim/plugged')
-	Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
-	Plug 'ayu-theme/ayu-vim'
-	Plug 'sheerun/vim-polyglot'
-	Plug 'easymotion/vim-easymotion'
-   Plug 'neoclide/coc.nvim', {'branch': 'release'}
-   Plug 'prettier/vim-prettier', {
-  \ 'do': 'npm install',
-  \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html', 'python'] }
-   Plug 'preservim/nerdcommenter'
-   Plug '/usr/local/opt/fzf'
-   Plug 'junegunn/fzf.vim'
-   Plug 'tpope/vim-surround'
-   Plug 'rust-lang/rust.vim'
-   Plug 'tpope/vim-fugitive'
-   Plug 'mattn/emmet-vim'
-   Plug 'kana/vim-arpeggio'
+  Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+  Plug 'ayu-theme/ayu-vim'
+  Plug 'sheerun/vim-polyglot'
+  Plug 'easymotion/vim-easymotion'
+  Plug 'neoclide/coc.nvim', {'branch': 'release'}
+  Plug 'prettier/vim-prettier', {
+        \ 'do': 'npm install',
+        \ 'branch': 'release/1.x' }
+  Plug 'preservim/nerdcommenter'
+  Plug '/usr/local/opt/fzf'
+  Plug 'junegunn/fzf.vim'
+  Plug 'tpope/vim-surround'
+  Plug 'rust-lang/rust.vim'
+  Plug 'tpope/vim-fugitive'
+  Plug 'mattn/emmet-vim'
+  Plug 'kana/vim-arpeggio'
+  Plug 'preservim/nerdtree'
+  Plug 'junegunn/vim-peekaboo'
 call plug#end()
 
 " EasyMotion
@@ -77,12 +85,18 @@ nnoremap <C-f> :Rg!
 
 " Prettier
 let g:prettier#autoformat = 0
-autocmd BufWritePre *.html,*.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue PrettierAsync
+let g:prettier#config#single_quote = 'false'
 
 " Arpeggio
 call arpeggio#map('i', '', 0, 'fn', 'function')
 call arpeggio#map('i', '', 0, 'rn', 'return')
 call arpeggio#map('i', '', 0, 'mt', 'import')
+
+" NerdTree
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | exe 'cd '.argv()[0] | endif
+map <C-n> :NERDTreeToggle<CR>
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 " CoC
 " if hidden is not set, TextEdit might fail.
