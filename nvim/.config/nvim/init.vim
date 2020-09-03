@@ -69,6 +69,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'kana/vim-arpeggio'
   Plug 'preservim/nerdtree'
   Plug 'junegunn/vim-peekaboo'
+  Plug 'lilydjwg/colorizer'
 call plug#end()
 
 " EasyMotion
