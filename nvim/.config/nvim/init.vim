@@ -28,11 +28,15 @@ nnoremap <esc><esc> :silent! nohls<cr>
 
 " Set Leader to Space
 let mapleader = "\<Space>"
+
 " Reload vimrc
 nnoremap <leader>rv :source<Space>$HOME/.config/nvim/init.vim<cr>
 
+" Temporary disable linenumber
+nnoremap <leader>l :set nornu<cr> :set nonu<cr>
+
 " Tab
-nnoremap <leader>t :tabnew<cr>
+nnoremap <leader>tt :tabnew<cr>
 nnoremap <leader>k :tabnext<cr>
 nnoremap <leader>j :tabprev<cr>
 
@@ -70,6 +74,8 @@ call plug#begin('~/.vim/plugged')
   Plug 'preservim/nerdtree'
   Plug 'junegunn/vim-peekaboo'
   Plug 'lilydjwg/colorizer'
+  Plug 'arcticicestudio/nord-vim'
+  Plug 'honza/vim-snippets'
 call plug#end()
 
 " EasyMotion
@@ -97,6 +103,7 @@ call arpeggio#map('i', '', 0, 'mt', 'import')
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | exe 'cd '.argv()[0] | endif
 map <C-n> :NERDTreeToggle<CR>
+nmap ,n :NERDTreeFind<CR>
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 " CoC
@@ -162,5 +169,4 @@ set mouse=a
 
 " Theme
 set termguicolors
-let ayucolor="mirage"   
-colorscheme ayu
+colorscheme nord
